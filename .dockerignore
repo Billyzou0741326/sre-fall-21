@@ -6,3 +6,5 @@ sreprojectenv/
 
 .gitignore
 README.md
+meetings/
+nginx/
