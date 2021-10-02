@@ -33,6 +33,10 @@ services:
       - PG_DATABASE=${PG_DATABASE}
       - SECRET_KEY=${SECRET_KEY}
       - EXTERNAL_IP=${EXTERNAL_IP}
+    volumes:
+      - type: volume
+        source: static-volume
+        target: /app/static
     depends_on:
       - postgres
     deploy:
@@ -41,14 +45,20 @@ services:
 
   frontend:
     image: "nginx:1.21.3-alpine"
+    ports:
+      - "127.0.0.1:10080:80"
     volumes:
       - ./nginx:/etc/nginx/templates
+      - type: volume
+        source: static-volume
+        target: /app/static
     environment:
       - NGINX_HOST=backend
-      - STATIC_ROOT=/app/static
+      - STATIC_ROOT=/app
     depends_on:
       - backend
 
 
 volumes:
-    postgres-volume:
+  postgres-volume:
+  static-volume:
