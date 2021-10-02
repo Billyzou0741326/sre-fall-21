@@ -1,0 +1,8 @@
+__pycache__
+sreprojectenv/
+.*.swp
+.*.swo
+.env
+
+.gitignore
+README.md
