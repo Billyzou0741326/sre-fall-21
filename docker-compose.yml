@@ -39,5 +39,16 @@ services:
       restart_policy:
         condition: any
 
+  frontend:
+    image: "nginx:1.21.3-alpine"
+    volumes:
+      - ./nginx:/etc/nginx/templates
+    environment:
+      - NGINX_HOST=backend
+      - STATIC_ROOT=/app/static
+    depends_on:
+      - backend
+
+
 volumes:
     postgres-volume:
