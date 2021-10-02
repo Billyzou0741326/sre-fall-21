@@ -12,4 +12,4 @@ FROM runtime
 WORKDIR /app/
 COPY . /app/
 EXPOSE 8000
-ENTRYPOINT ["/bin/sh", "-c", "./manage.py collectstatic && gunicorn --bind 0.0.0.0:8000 sreproject.wsgi"]
+ENTRYPOINT ["/bin/sh", "-c", "echo yes | ./manage.py collectstatic && gunicorn --bind 0.0.0.0:8000 sreproject.wsgi"]
