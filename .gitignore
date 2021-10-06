@@ -3,3 +3,4 @@ sreprojectenv/
 .*.swp
 .*.swo
 .env
+.env.development

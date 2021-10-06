@@ -8,16 +8,14 @@ services:
       driver: none
     container_name: postgres-server
     environment:
-      - POSTGRES_USER=
-      - POSTGRES_PASSWORD=
-      - POSTGRES_DB=
+      - POSTGRES_USER=${PG_USER}
+      - POSTGRES_PASSWORD=${PG_PASSWORD}
+      - POSTGRES_DB=${PG_DATABASE}
     volumes:
       - type: volume
         source: postgres-volume
         target: /var/lib/postgresql
-    deploy:
-      restart_policy:
-        condition: any
+    restart: always
 
   backend:
     build:
@@ -39,9 +37,7 @@ services:
         target: /app/static
     depends_on:
       - postgres
-    deploy:
-      restart_policy:
-        condition: any
+    restart: always
 
   frontend:
     image: "nginx:1.21.3-alpine"
@@ -57,6 +53,7 @@ services:
       - STATIC_ROOT=/app
     depends_on:
       - backend
+    restart: always
 
 
 volumes:
