@@ -21,8 +21,6 @@ services:
     build:
       context: "./"
       dockerfile: Dockerfile
-    ports:
-      - "127.0.0.1:38000:8000"
     environment:
       - PG_HOST=postgres
       - PG_PORT=5432
