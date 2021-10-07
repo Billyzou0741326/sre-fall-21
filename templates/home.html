@@ -1,0 +1,33 @@
+<h1> This is the Todo page. <br /> </h1>
+<h2> Here are some of the tasks we need to take care of in regards to our project. </h2> <br />
+
+<ul>
+    {% for home_item in all_items %}
+    <li>
+        <b>Task:</b> {{ home_item.content }}
+        <b>Posted on:</b> {{ home_item.date_created }}
+        <b>By:</b> {{home_item.author }}
+    </li>
+    <form action="/deleteHome/{{home_item.id}}/" style="display: inline-block;" method="post">{%csrf_token%}
+        <input type="submit" value = "Done"/>
+    </form>
+    {% endfor %}
+</ul>
+
+<form action="/addHome/" method="post">{%csrf_token%}
+    <input type="text" name = "content" placeholder = "Task to do"/>
+    <input type="text" name = "date_created" placeholder = "Date YYYY-MM-DD"/>
+    <input type="text" name = "author" placeholder = "Taken care by"/>
+    <input type="submit" value = "Add"/>
+</form>
+<br />
+<h3> Check out some of the tasks we've finished! </h3>
+<form action="/done/" method="get">
+    <button type="submit" class="button1"> Completed Items </button>
+</form>
+<br />
+<h3> Here's some info about the Team </h3>
+<form action="/about/" method="get">
+    <button type="submit" class="button2"> About Us </button>
+</form>
+

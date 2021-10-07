@@ -1,0 +1,11 @@
+<h1> List of Completed items </h1>
+
+<ul>
+    {% for done_item in done_items %}
+    <li>
+        <b>Task:</b> {{ done_item.content }}
+        <b>Completed on:</b> {{ done_item.date_completed }}
+        <b>By:</b> {{done_item.author }}
+    </li>
+    {% endfor %}
+</ul>
