@@ -1,0 +1,25 @@
+{
+  "name": "sre-fall-21-site",
+  "version": "1.0.0",
+  "description": "## Test",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@gitlab.com/zguanhan/sre-fall-21.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/zguanhan/sre-fall-21/issues"
+  },
+  "homepage": "https://gitlab.com/zguanhan/sre-fall-21#readme",
+  "devDependencies": {
+    "autoprefixer": "^10.3.7",
+    "postcss-cli": "^9.0.1",
+    "tailwindcss": "^2.2.16"
+  }
+}

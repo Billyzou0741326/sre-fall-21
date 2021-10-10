@@ -4,6 +4,10 @@ sreprojectenv/
 .*.swp
 .*.swo
 .env
+.env.development
+node_modules
+static/
+meetings/
 
 .gitignore
 README.md

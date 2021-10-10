@@ -29,10 +29,6 @@ services:
       - PG_DATABASE=${PG_DATABASE}
       - SECRET_KEY=${SECRET_KEY}
       - EXTERNAL_IP=${EXTERNAL_IP}
-    volumes:
-      - type: volume
-        source: static-volume
-        target: /app/static
     depends_on:
       - postgres
     restart: always
@@ -43,9 +39,7 @@ services:
       - "127.0.0.1:10080:80"
     volumes:
       - ./nginx:/etc/nginx/templates
-      - type: volume
-        source: static-volume
-        target: /app/static
+      - /app/static
     environment:
       - NGINX_HOST=backend
       - STATIC_ROOT=/app
@@ -56,4 +50,3 @@ services:
 
 volumes:
   postgres-volume:
-  static-volume:

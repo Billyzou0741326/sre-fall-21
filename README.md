@@ -4,6 +4,8 @@
 
 ## Deploy
 
+First, ensure `.env` file is present under the top level of the project with the correct configuration.
+
 There are multiple steps to deploying the site with docker:
 
 Initialize docker containers
@@ -18,10 +20,11 @@ Set up postgres server
 docker-compose start postgres   # starts the postgresql container
 ```
 
-Brings up all services
+Bring up all services
 
 ```shell
-docker-compose up -d            # starts all services (backend)
+docker-compose up -d --build    # starts all services (backend)
+docker cp sre-fall-21-site_backend_1:/app/static ./ && docker cp ./static/ sre-fall-21-site_frontend_1:/app/    # copy static files to nginx
 ```
 
 After the services are started up and running, proceed to set up some one-time configuration for django 
@@ -29,10 +32,7 @@ After the services are started up and running, proceed to set up some one-time c
 ### One-time conifguration
 
 ```shell
-docker-compose exec backend python manage.py makemigrations     # init database migrations
-docker-compose exec backend python manage.py migrate            # run migrations
 docker-compose exec backend python manage.py createsuperuser    # create admin accounts for the web app
-docker-compose exec backend python manage.py collectstatic      # collect static files
 ```
 
 ## Develop

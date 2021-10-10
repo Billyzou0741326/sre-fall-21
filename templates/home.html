@@ -1,33 +1,58 @@
-<h1> This is the Todo page. <br /> </h1>
-<h2> Here are some of the tasks we need to take care of in regards to our project. </h2> <br />
+{% load static %}
 
-<ul>
-    {% for home_item in all_items %}
-    <li>
-        <b>Task:</b> {{ home_item.content }}
-        <b>Posted on:</b> {{ home_item.date_created }}
-        <b>By:</b> {{home_item.author }}
-    </li>
-    <form action="/deleteHome/{{home_item.id}}/" style="display: inline-block;" method="post">{%csrf_token%}
-        <input type="submit" value = "Done"/>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'css/tailwind-output.css' %}" />
+</head>
+
+<body class="p-6">
+<h1 class="mt-4 text-3xl font-bold"> This is the Todo page. </h1>
+<section class="my-6">
+    <h2 class="text-xl font-semibold"> Here are some of the tasks we need to take care of in regards to our project. </h2>
+
+    <ul class="mt-2 flex flex-col space-y-2">
+        {% for home_item in all_items %}
+        <div class="flex flex-row space-x-2">
+            <li class="flex flex-row space-x-2 items-center">
+                <div>
+                    <b>Task:</b> {{ home_item.content }}
+                </div>
+                <div>
+                    <b>Posted on:</b> {{ home_item.date_created }}
+                </div>
+                <div>
+                    <b>By:</b> {{home_item.author }}
+                </div>
+            </li>
+            <form action="/deleteHome/{{home_item.id}}/" style="display: inline-block;" method="post">{%csrf_token%}
+                <input class="bg-blue-500 hover:bg-blue-700 text-white py-1 px-1 rounded focus:outline-none focus:shadow-outline" type="submit" value="Done"/>
+            </form>
+        </div>
+        {% endfor %}
+    </ul>
+
+    <form class="mt-2 w-full md:w-2/3 flex-col md:flex-row space-x-2 space-y-2" action="/addHome/" method="post">{%csrf_token%}
+        <input class="shadow appearance-none border rounded w-full md:w-40 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:ring focus:border-blue-300" type="text" name="content" placeholder="Task to do"/>
+        <input class="shadow appearance-none border rounded w-full md:w-40 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:ring focus:border-blue-300" type="text" name="date_created" placeholder="Date YYYY-MM-DD"/>
+        <input class="shadow appearance-none border rounded w-full md:w-40 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:ring focus:border-blue-300" type="text" name="author" placeholder="Taken care by"/>
+        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">Add</button>
     </form>
-    {% endfor %}
-</ul>
+</section>
 
-<form action="/addHome/" method="post">{%csrf_token%}
-    <input type="text" name = "content" placeholder = "Task to do"/>
-    <input type="text" name = "date_created" placeholder = "Date YYYY-MM-DD"/>
-    <input type="text" name = "author" placeholder = "Taken care by"/>
-    <input type="submit" value = "Add"/>
-</form>
-<br />
-<h3> Check out some of the tasks we've finished! </h3>
-<form action="/done/" method="get">
-    <button type="submit" class="button1"> Completed Items </button>
-</form>
-<br />
-<h3> Here's some info about the Team </h3>
-<form action="/about/" method="get">
-    <button type="submit" class="button2"> About Us </button>
-</form>
+<section class="my-6">
+    <h3 class="text-lg font-semibold"> Check out some of the tasks we've finished! </h3>
+    <div class="mt-2">
+        <a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800 hover:underline" href="/done/"> Completed items </a>
+    </div>
+</section>
 
+<section class="my-6">
+    <h3 class="text-lg font-semibold"> Here's some info about the Team </h3>
+    <div class="mt-2">
+        <a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800 hover:underline" href="/about/"> About us </a>
+    </div>
+</section>
+</body>
+</html>
