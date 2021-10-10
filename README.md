@@ -24,7 +24,7 @@ Bring up all services
 
 ```shell
 docker-compose up -d --build    # starts all services (backend)
-docker cp sre-fall-21-site_backend_1:/app/static ./ && docker cp ./static/ sre-fall-21-site_frontend_1:/app/    # copy static files to nginx
+docker cp sre-fall-21_backend_1:/app/static ./ && docker cp ./static/ sre-fall-21_frontend_1:/app/    # copy static files to nginx
 ```
 
 After the services are started up and running, proceed to set up some one-time configuration for django 

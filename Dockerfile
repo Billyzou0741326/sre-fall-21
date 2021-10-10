@@ -9,7 +9,7 @@ FROM static_builder AS static
 WORKDIR /app/
 COPY ./css /app/css/
 COPY ./templates /app/templates/
-RUN npx postcss css/tailwind.css -o css/tailwind-output.css 
+RUN NODE_ENV=production npx postcss css/tailwind.css -o css/tailwind-output.css
 
 
 FROM python:3.8.12-alpine3.14 AS runtime
