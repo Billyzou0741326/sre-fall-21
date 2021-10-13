@@ -6,10 +6,10 @@ sreprojectenv/
 .env
 .env.development
 node_modules
+package-lock.json
 static/
+css/tailwind-output.css
 meetings/
 
 .gitignore
 README.md
-meetings/
-nginx/

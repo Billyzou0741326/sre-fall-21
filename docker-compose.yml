@@ -34,12 +34,11 @@ services:
     restart: always
 
   frontend:
-    image: "nginx:1.21.3-alpine"
+    build:
+      context: "./"
+      dockerfile: Dockerfile-nginx
     ports:
       - "127.0.0.1:10080:80"
-    volumes:
-      - ./nginx:/etc/nginx/templates
-      - /app/static
     environment:
       - NGINX_HOST=backend
       - STATIC_ROOT=/app

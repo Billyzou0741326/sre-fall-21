@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+from django.core.management.utils import get_random_secret_key
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -22,12 +23,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 #SECRET_KEY = 'django-insecure-33m3%r-tdthi(+sbck4h=7p($009%67w)a2=x8n%(*o2d=khw^'
-SECRET_KEY = os.environ['SECRET_KEY'] or ''
+SECRET_KEY = os.getenv('SECRET_KEY', default=get_random_secret_key())
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', os.environ['EXTERNAL_IP']]
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', os.getenv('EXTERNAL_IP', default='*')]
 
 INTERNAL_IPS = ['127.0.0.1']
 
@@ -81,11 +82,11 @@ WSGI_APPLICATION = 'sreproject.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.environ['PG_DATABASE'],
-        'HOST': os.environ['PG_HOST'] or 'localhost',
-        'PORT': int(os.environ['PG_PORT'] or '5432'),
-        'USER': os.environ['PG_USER'],
-        'PASSWORD': os.environ['PG_PASSWORD'],
+        'NAME': os.getenv('PG_DATABASE', default='default'),
+        'HOST': os.getenv('PG_HOST', default='localhost'),
+        'PORT': int(os.getenv('PG_PORT', default='5432')),
+        'USER': os.getenv('PG_USER', default='default-notsafe'),
+        'PASSWORD': os.getenv('PG_PASSWORD', default='default-notsafe'),
     }
 }
 
