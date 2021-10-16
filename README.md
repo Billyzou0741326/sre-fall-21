@@ -36,6 +36,25 @@ docker-compose exec backend python manage.py createsuperuser    # create admin a
 
 ## Develop
 
+### Start python application
+
+On a separate shell, do:
+
+```shell
+dotenv python3 manage.py runserver 0.0.0.0:9000     # run python app
+```
+
+### Watch tailwind css style changes
+
+On a separate shell, do:
+
+```shell
+npx postcss css/tailwind.css -o static/css/tail wind-output.css --watch 
+```
+
+Now make changes to the code/html and see the changes live!
+
+
 This workflow aims to resolve commit history conflicts.
 
 After committing (`git commit`) new changes, before pushing to the remote repository:

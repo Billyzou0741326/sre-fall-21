@@ -1,5 +1,9 @@
 # SRE Team Meeting
 
+## Sat Oct 16, 2021
+- Development environment
+- Docker issues?
+
 ## Sat Oct 09, 2021
 
 - Configuration
