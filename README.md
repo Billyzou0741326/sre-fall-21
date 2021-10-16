@@ -49,7 +49,7 @@ dotenv python3 manage.py runserver 0.0.0.0:9000     # run python app
 On a separate shell, do:
 
 ```shell
-npx postcss css/tailwind.css -o static/css/tail wind-output.css --watch 
+npx postcss css/tailwind.css -o static/css/tailwind-output.css --watch 
 ```
 
 Now make changes to the code/html and see the changes live!
