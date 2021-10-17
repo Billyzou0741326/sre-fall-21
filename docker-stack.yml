@@ -1,0 +1,58 @@
+version: "3.7"
+
+services:
+
+  postgres:
+    image: "postgres:14.0-alpine3.14"
+    logging:
+      driver: none
+    environment:
+      - POSTGRES_USER=${PG_USER}
+      - POSTGRES_PASSWORD=${PG_PASSWORD}
+      - POSTGRES_DB=${PG_DATABASE}
+    volumes:
+      - type: volume
+        source: postgres-volume
+        target: /var/lib/postgresql
+    deploy:
+      mode: replicated
+      replicas: 1
+      restart_policy:
+        condition: any
+      placement:
+        constraints: [node.labels.storage == database]
+
+  backend:
+    image: "zguanhan/sre-f21-app:1.0"
+    environment:
+      - PG_HOST=postgres
+      - PG_PORT=5432
+      - PG_USER=${PG_USER}
+      - PG_PASSWORD=${PG_PASSWORD}
+      - PG_DATABASE=${PG_DATABASE}
+      - SECRET_KEY=${SECRET_KEY}
+      - EXTERNAL_IP=${EXTERNAL_IP}
+    depends_on:
+      - postgres
+    deploy:
+      replicas: 2
+      restart_policy:
+        condition: any
+
+  frontend:
+    image: "zguanhan/sre-f21-nginx:1.0"
+    ports:
+      - "10080:80"
+    environment:
+      - NGINX_HOST=backend
+      - STATIC_ROOT=/app
+    depends_on:
+      - backend
+    deploy:
+      replicas: 2
+      restart_policy:
+        condition: any
+
+
+volumes:
+  postgres-volume:
