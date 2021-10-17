@@ -1,20 +1,13 @@
-{% load static %}
+{% extends "layout.html" %}
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="{% static 'css/tailwind-output.css' %}" />
-</head>
-
-<body>
-<div class="p-4 lg:p-8">
+{% block main %}
+<div class="px-4 lg:px-8">
     <header>
-        <h1 class="my-4 text-3xl font-bold"> Completed tasks </h1>
+        <h1 class="my-4 tracking-wide text-3xl"> Completed tasks </h1>
     </header>
 
     <section>
-        <table class="table-fixed relative bg-white shadow rounded-2xl p-6 w-full md:w-auto lg:w-2/3">
+        <table class="table-fixed relative bg-white shadow-md rounded-2xl p-6 w-full md:w-auto lg:w-2/3">
             <thead>
                 <tr>
                     <th class="px-4 py-3 w-1/2 text-left">Task</th>
@@ -34,5 +27,4 @@
         </table>
     </section>
 </div>
-</body>
-</html>
+{% endblock %}

@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
+from django.contrib import messages
 from .models import HomeItem
 from .models import DoneItem
 from subprocess import check_output
@@ -12,6 +13,15 @@ def homeView(request):
     return render(request, 'home.html', {'all_items': all_home_items})
 
 def addHome(request):
+    if not request.POST['content']:
+        messages.error(request, 'invalid content')
+        return HttpResponseRedirect('/home/')
+    if not request.POST['date_created']:
+        messages.error(request, 'invalid date')
+        return HttpResponseRedirect('/home/')
+    if not request.POST['author']:
+        messages.error(request, 'invalid author')
+        return HttpResponseRedirect('/home/')
     new_item = HomeItem(content = request.POST['content'],
                         date_created = request.POST['date_created'],
                         author = request.POST['author'])

@@ -1,24 +1,17 @@
-{% load static %}
+{% extends "layout.html" %}
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="{% static 'css/tailwind-output.css' %}" />
-</head>
-
-<body>
-<div class="p-4 lg:p-8">
+{% block main %}
+<div class="px-4 lg:px-8">
     <header>
-        <h1 class="my-4 text-3xl font-bold"> Todo </h1>
+        <h1 class="my-4 text-3xl tracking-wide font-light"> Todo </h1>
     </header>
 
     <header>
-        <h2 class="my-4 text-xl font-semibold"> Here are some of the tasks we need to take care of in regards to our project. </h2>
+        <h2 class="my-4 text-xl"> Here are some of the tasks we need to take care of in regards to our project. </h2>
     </header>
 
     <section>
-        <table class="table-fixed bg-white shadow rounded-2xl p-6 w-full md:w-auto lg:w-2/3">
+        <table class="table-fixed bg-white shadow-md rounded-2xl p-6 w-full md:w-auto lg:w-2/3">
             <thead>
                 <tr>
                     <th class="px-3 py-3 w-1/4 md:w-3/6 text-left">Task</th>
@@ -44,13 +37,13 @@
                 <tr>
                 <form action="/addHome/" method="post">{% csrf_token %}
                     <td class="px-3 py-2">
-                        <input class="w-full shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring focus:border-blue-300" type="text" name="content" placeholder="Task to do"/>
+                        <input class="w-full shadow appearance-none border border-gray-300 rounded-md py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-blue-500" type="text" name="content" placeholder="Task to do"/>
                     </td>
                     <td class="px-3 py-2">
-                        <input class="w-full shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring focus:border-blue-300" type="text" name="date_created" placeholder="YYYY-MM-DD"/>
+                        <input class="w-full shadow appearance-none border border-gray-300 rounded-md py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-blue-500" type="text" name="date_created" placeholder="YYYY-MM-DD"/>
                     </td>
                     <td class="px-3 py-2">
-                        <input class="w-full shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring focus:border-blue-300" type="text" name="author" placeholder="Taken care by"/>
+                        <input class="w-full shadow appearance-none border border-gray-300 rounded-md py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-blue-500" type="text" name="author" placeholder="Taken care by"/>
                     </td>
                     <td class="px-3 py-2">
                         <button class="w-full sm:w-16 bg-blue-500 hover:bg-blue-700 text-white py-2 px-2 rounded" type="submit">Add</button>
@@ -62,18 +55,18 @@
     </section>
 
     <section class="my-6">
-        <h3 class="text-lg font-semibold"> Check out some of the tasks we've finished! </h3>
-        <div class="mt-2">
-            <a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800 hover:underline" href="/done/"> Completed items </a>
-        </div>
+        <h3 class="text-lg">
+            Check out some of the 
+                <a class="inline-block align-baseline text-blue-500 hover:text-blue-700 hover:underline" href="/done/">tasks</a>
+            we've finished!
+        </h3>
     </section>
 
     <section class="my-6">
-        <h3 class="text-lg font-semibold"> Here's some info about the Team </h3>
-        <div class="mt-2">
-            <a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800 hover:underline" href="/about/"> About us </a>
-        </div>
+        <h3 class="text-lg">
+            Here's some info about the
+            <a class="inline-block align-baseline text-blue-500 hover:text-blue-700 hover:underline" href="/about/">team</a>
+        </h3>
     </section>
 </div>
-</body>
-</html>
+{% endblock %}
