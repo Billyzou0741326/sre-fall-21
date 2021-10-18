@@ -21,6 +21,9 @@ services:
         condition: any
       placement:
         constraints: [node.labels.storage == database]
+      update_config:
+        failure_action: rollback
+        order: stop-first
 
   backend:
     image: "zguanhan/sre-f21-app:1.0"
@@ -38,6 +41,9 @@ services:
       replicas: 2
       restart_policy:
         condition: any
+      update_config:
+        failure_action: pause
+        order: start-first
 
   frontend:
     image: "zguanhan/sre-f21-nginx:1.0"
@@ -52,6 +58,9 @@ services:
       replicas: 2
       restart_policy:
         condition: any
+      update_config:
+        failure_action: pause
+        order: start-first
 
 
 volumes:
