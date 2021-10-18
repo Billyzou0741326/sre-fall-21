@@ -26,7 +26,7 @@ services:
         order: stop-first
 
   backend:
-    image: "zguanhan/sre-f21-app:1.0"
+    image: "zguanhan/sre-f21-app:latest"
     environment:
       - PG_HOST=postgres
       - PG_PORT=5432
@@ -46,7 +46,7 @@ services:
         order: start-first
 
   frontend:
-    image: "zguanhan/sre-f21-nginx:1.0"
+    image: "zguanhan/sre-f21-nginx:latest"
     ports:
       - "10080:80"
     environment:
