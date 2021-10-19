@@ -42,6 +42,7 @@ services:
       restart_policy:
         condition: any
       update_config:
+        delay: 30s
         failure_action: pause
         order: start-first
 
@@ -59,6 +60,7 @@ services:
       restart_policy:
         condition: any
       update_config:
+        delay: 30s
         failure_action: pause
         order: start-first
 
