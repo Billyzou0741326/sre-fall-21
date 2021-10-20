@@ -21,6 +21,8 @@ spec:
   selector:
     matchLabels:
       app: sre-nginx
+  strategy:
+    type: RollingUpdate
   template:
     metadata:
       labels:

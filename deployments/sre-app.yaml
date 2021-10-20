@@ -21,6 +21,8 @@ spec:
   selector:
     matchLabels:
       app: sre-django
+  strategy:
+    type: RollingUpdate
   template:
     metadata:
       labels:

@@ -1,15 +1,18 @@
 __pycache__
-.git
-sreprojectenv/
 .*.swp
 .*.swo
+.git/
+.gitignore
+
 .env
 .env.development
+sreprojectenv/
 node_modules
 package-lock.json
 static/
 css/tailwind-output.css
 meetings/
+deployments/
+docs/
 
-.gitignore
 README.md
