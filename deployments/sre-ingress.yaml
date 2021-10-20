@@ -4,6 +4,10 @@ metadata:
   name: sre-ingress
 spec:
   ingressClassName: nginx
+  tls:
+  - hosts:
+    - sre-dev.minamiktr.com
+    secretName: sre-tls
   rules:
   - host: sre-dev.minamiktr.com
     http:
