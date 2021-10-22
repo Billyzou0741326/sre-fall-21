@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sre-config
+data:
+  PG_USER: "sreproject"
+  PG_DATABASE: "sreproject"
+  # DO NOT include passwords or secret keys here. Use k8s secret for it (check README)

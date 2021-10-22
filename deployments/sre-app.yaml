@@ -42,14 +42,20 @@ spec:
           - name: PG_PORT
             value: "5432"
           - name: PG_USER
-            value: sreproject
+            valueFrom:
+              configMapKeyRef:
+                name: sre-config
+                key: PG_USER
           - name: PG_DATABASE
-            value: sreproject
+            valueFrom:
+              configMapKeyRef:
+                name: sre-config
+                key: PG_DATABASE
           - name: SECRET_KEY
             valueFrom:
               secretKeyRef:
-                name: django-secret-key
-                key: secret-key
+                name: sre-secret
+                key: SECRET_KEY
           - name: EXTERNAL_IP
             value: "*"
         ports:

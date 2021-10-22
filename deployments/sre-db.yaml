@@ -38,9 +38,15 @@ spec:
               name: postgres-pass
               key: password
         - name: POSTGRES_USER
-          value: sreproject
-        - name: POSTGRES_DATABASE
-          value: sreproject
+          valueFrom:
+            configMapKeyRef:
+              name: sre-config
+              key: PG_USER
+        - name: POSTGRES_DB
+          valueFrom:
+            configMapKeyRef:
+              name: sre-config
+              key: PG_DATABASE
         ports:
         - containerPort: 5432
           name: postgres
