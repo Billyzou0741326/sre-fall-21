@@ -35,8 +35,8 @@ spec:
         - name: POSTGRES_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: postgres-pass
-              key: password
+              name: sre-secret
+              key: PG_PASSWORD
         - name: POSTGRES_USER
           valueFrom:
             configMapKeyRef:
