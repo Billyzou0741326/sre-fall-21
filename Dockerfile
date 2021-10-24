@@ -1,4 +1,4 @@
-FROM zguanhan/sre-f21-base:1.0
+FROM zguanhan/sre-f21-base:latest
 WORKDIR /app/
 COPY . /app/
 EXPOSE 8000

@@ -24,7 +24,7 @@ data:
             - config:
                 - module: kubernetes
                   hosts: ["kube-state-metrics:8080"]
-                  period: 10s
+                  period: 2m
                   add_metadata: true
                   metricsets:
                     - state_node
@@ -44,7 +44,7 @@ data:
                   bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
                   ssl.certificate_authorities:
                     - /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
-                  period: 30s
+                  period: 10m
                 # Uncomment this to get k8s events:
                 #- module: kubernetes
                 #  metricsets:
@@ -80,7 +80,7 @@ metadata:
 data:
   system.yml: |-
     - module: system
-      period: 10s
+      period: 3m
       metricsets:
         - cpu
         - load
@@ -97,7 +97,7 @@ data:
         by_memory: 5   # include top 5 processes by memory
 
     - module: system
-      period: 1m
+      period: 3m
       metricsets:
         - filesystem
         - fsstat
@@ -112,7 +112,7 @@ data:
         - pod
         - container
         - volume
-      period: 10s
+      period: 3m
       host: ${NODE_NAME}
       hosts: ["https://${NODE_NAME}:10250"]
       bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
@@ -125,7 +125,7 @@ data:
     - module: kubernetes
       metricsets:
         - proxy
-      period: 10s
+      period: 3m
       host: ${NODE_NAME}
       hosts: ["localhost:10249"]
 ---
@@ -203,9 +203,9 @@ spec:
           #privileged: true
         resources:
           limits:
-            memory: 200Mi
+            memory: 150Mi
           requests:
-            cpu: 100m
+            cpu: 50m
             memory: 100Mi
         volumeMounts:
         - name: config

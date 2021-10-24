@@ -23,6 +23,7 @@ spec:
       app: sre-nginx
   strategy:
     type: RollingUpdate
+  minReadySeconds: 3
   template:
     metadata:
       labels:

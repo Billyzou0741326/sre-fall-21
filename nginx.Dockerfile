@@ -1,4 +1,4 @@
-FROM zguanhan/sre-f21-base:1.0 AS static_1
+FROM zguanhan/sre-f21-base:latest AS static_1
 WORKDIR /app/
 COPY . /app/
 RUN python3 manage.py collectstatic --no-input

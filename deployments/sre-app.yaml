@@ -23,6 +23,7 @@ spec:
       app: sre-django
   strategy:
     type: RollingUpdate
+  minReadySeconds: 5
   template:
     metadata:
       labels:

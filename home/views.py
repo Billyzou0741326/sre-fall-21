@@ -3,9 +3,12 @@ from django.http import HttpResponseRedirect
 from django.contrib import messages
 from .models import HomeItem
 from .models import DoneItem
-from subprocess import check_output
+import psutil
 import os
+import signal
 import time
+from operator import is_not
+from functools import partial
 
 # Create your views here.
 def homeView(request):
@@ -43,3 +46,37 @@ def doneItems(request):
 
 def redirectAbout(request):
     return render(request, 'about.html')
+
+def terminateSite(request, program):
+    def get_pinfo(p):
+        try:
+            return p.as_dict(attrs=['pid', 'name', 'create_time'])
+        except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
+            pass
+        return None
+    def matches_name(p, program):
+        try:
+            return program.lower() == p['name'].lower()
+        except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
+            pass
+        return False
+    def get_pid(pinfo):
+        try:
+            return pinfo.get('pid')
+        except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
+            pass
+        return False
+    procs = filter(partial(is_not, None), [ get_pinfo(p) for p in psutil.process_iter() ])
+    procs_to_kill = [ p for p in procs if matches_name(p, program) ]
+    pids = [ get_pid(p) for p in procs_to_kill ]
+    for pid in pids:
+        os.kill(pid, signal.SIGTERM)
+    return HttpResponseRedirect('/home/')
+
+def sleepSite(request, number):
+    try:
+        sleep_secs = number / 1000
+        time.sleep(sleep_secs)
+    except (TypeError, ValueError):
+        pass
+    return render(request, 'donework.html', {'time': sleep_secs})
