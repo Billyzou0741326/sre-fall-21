@@ -11,8 +11,7 @@ sudo mkdir -p /data/srepostgres        # /data/srepostgres is used in sre-db.yam
 Create passwords via the k8s secret commands:
 
 ```shell
-kubectl create secret generic postgres-pass --from-literal=password=<your_postgres_password>
-kubectl create secret generic django-secret-key --from-literal=secret-key=<your_secret_key>
+kubectl create secret generic sre-secret --from-env-file=.env
 ```
 
 ## Deploy

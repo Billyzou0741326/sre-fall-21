@@ -13,6 +13,8 @@ static/
 css/tailwind-output.css
 meetings/
 deployments/
+monitoring/
+nginx-ingress/
 docs/
 
 README.md
