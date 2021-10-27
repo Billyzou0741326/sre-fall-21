@@ -2,15 +2,15 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: sre-ingress
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
 spec:
-  ingressClassName: nginx
   tls:
   - hosts:
     - sre-dev.minamiktr.com
     secretName: sre-tls
   rules:
-  - host: sre-dev.minamiktr.com
-    http:
+  - http:
       paths:
       - path: /
         pathType: Prefix
@@ -18,7 +18,7 @@ spec:
           service:
             name: sre-app
             port:
-              number: 80
+              number: 8000
       - path: /static
         pathType: Prefix
         backend:

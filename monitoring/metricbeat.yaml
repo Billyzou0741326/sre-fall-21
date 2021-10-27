@@ -83,7 +83,7 @@ metadata:
 data:
   system.yml: |-
     - module: system
-      period: 3m
+      period: 30s
       metricsets:
         - cpu
         - load
@@ -100,7 +100,7 @@ data:
         by_memory: 5   # include top 5 processes by memory
 
     - module: system
-      period: 3m
+      period: 1m
       metricsets:
         - filesystem
         - fsstat
@@ -131,6 +131,14 @@ data:
       period: 3m
       host: ${NODE_NAME}
       hosts: ["localhost:10249"]
+  nginx.yml: |-
+    - module: nginx
+  	  metricsets:
+  	    - stubstatus
+  	  enabled: true
+  	  period: 20s
+  	  hosts: ["http://sre-nginx.default"]
+  	  server_status_path: "/server-status"
 ---
 # Deploy a Metricbeat instance per node for node metrics retrieval
 apiVersion: apps/v1
