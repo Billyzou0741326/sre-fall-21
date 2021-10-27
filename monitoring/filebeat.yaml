@@ -27,7 +27,7 @@ data:
           templates:
           - condition:
               equals:
-                kubernetes.namespace: nginx-ingress
+                kubernetes.namespace: ingress-nginx
             config:
             - module: nginx
               ingress_controller:
