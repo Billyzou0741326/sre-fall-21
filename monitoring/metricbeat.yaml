@@ -133,12 +133,12 @@ data:
       hosts: ["localhost:10249"]
   nginx.yml: |-
     - module: nginx
-  	  metricsets:
-  	    - stubstatus
-  	  enabled: true
-  	  period: 20s
-  	  hosts: ["http://sre-nginx.default"]
-  	  server_status_path: "/server-status"
+      metricsets:
+        - stubstatus
+      enabled: true
+      period: 20s
+      hosts: ["http://sre-nginx.default"]
+      server_status_path: "/server-status"
 ---
 # Deploy a Metricbeat instance per node for node metrics retrieval
 apiVersion: apps/v1
