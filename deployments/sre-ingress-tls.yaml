@@ -10,7 +10,8 @@ spec:
     - sre-dev.minamiktr.com
     secretName: sre-tls
   rules:
-  - http:
+  - host: sre-dev.minamiktr.com
+    http:
       paths:
       - path: /
         pathType: Prefix
