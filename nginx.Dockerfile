@@ -12,12 +12,13 @@ RUN npm install
 
 FROM static_builder_2 AS static_2
 WORKDIR /app/
-COPY ./css /app/css/
+COPY ./css /app/css
+COPY ./public /app/public
 COPY ./templates /app/templates/
-RUN NODE_ENV=production npx postcss css/tailwind.css -o css/tailwind-output.css
+RUN NODE_ENV=production npx postcss css/tailwind.css -o public/static/css/tailwind-output.css
 
 
 FROM nginx:1.21.3-alpine
-COPY --from=static_1 /app/static/ /app/static/
-COPY --from=static_2 /app/css/tailwind-output.css /app/static/css/tailwind-output.css
+COPY --from=static_2 /app/public/ /app/public/
+COPY --from=static_1 /app/static/ /app/public/static/
 COPY ./nginx/* /etc/nginx/templates/

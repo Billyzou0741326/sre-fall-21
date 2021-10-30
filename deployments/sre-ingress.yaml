@@ -22,3 +22,10 @@ spec:
             name: sre-nginx
             port:
               number: 80
+      - path: /favicon.ico
+        pathType: Exact
+        backend:
+          service:
+            name: sre-nginx
+            port:
+              number: 80

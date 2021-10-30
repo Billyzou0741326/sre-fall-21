@@ -18,6 +18,8 @@ server {
         server_name _;
 
         location = /favicon.ico {
+                root ${STATIC_ROOT};
+
                 access_log off;
                 log_not_found off;
         }
