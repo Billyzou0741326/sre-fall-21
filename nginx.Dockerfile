@@ -19,6 +19,8 @@ RUN NODE_ENV=production npx postcss css/tailwind.css -o public/static/css/tailwi
 
 
 FROM nginx:1.21.3-alpine
+ENV STATIC_ROOT=/app/public
+ENV UPSTREAM_HOST=localhost
 COPY --from=static_2 /app/public/ /app/public/
 COPY --from=static_1 /app/static/ /app/public/static/
 COPY ./nginx/* /etc/nginx/templates/

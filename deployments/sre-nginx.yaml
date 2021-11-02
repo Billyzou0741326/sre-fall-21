@@ -33,7 +33,7 @@ spec:
       - image: zguanhan/sre-f21-nginx:latest
         name: nginx
         env:
-          - name: NGINX_HOST
+          - name: UPSTREAM_HOST
             value: sre-app
           - name: STATIC_ROOT
             value: /app/public
