@@ -89,17 +89,14 @@ data:
     # E.g. `cloudflared tunnel route dns example-tunnel tunnel.example.com`.
     ingress:
     # The first rule proxies traffic to the httpbin sample Service defined in app.yaml
-    - hostname: example.minamiktr.com
-      path: /static/*
-      service: http://sre-nginx:80
-    - hostname: example.minamiktr.com
-      path: /favicon.ico
-      service: http://sre-nginx:80
-    - hostname: example.minamiktr.com
+    - hostname: sre.minamiktr.com
       path: /
-      service: http://sre-app:8000
+      service: http://sre-nginx:80
       originRequest:
         connectTimeout: 3s
+    - hostname: sre-monitor.minamiktr.com
+      path: /
+      service: http://10.138.0.12:5601
     # This rule sends traffic to the built-in hello-world HTTP server. This can help debug connectivity
     # issues. If hello.example.com resolves and tunnel.example.com does not, then the problem is
     # in the connection from cloudflared to your local service, not from the internet to cloudflared.

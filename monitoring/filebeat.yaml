@@ -27,10 +27,10 @@ data:
           templates:
           - condition:
               equals:
-                kubernetes.namespace: ingress-nginx
+                kubernetes.container.name: "nginx"
             config:
             - module: nginx
-              ingress_controller:
+              access:
                 enabled: true
                 input:
                   type: container

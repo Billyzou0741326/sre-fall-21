@@ -1,3 +1,9 @@
+# Combining the nginx web server and the django application in one file.
+# Nginx is really only needed for serving static files (css, js etc.)
+# Nginx also handles logging (and log aggregation) for filebeat to consume.
+#
+# Check monitoring/filebeats.yaml for details
+
 apiVersion: v1
 kind: Service
 metadata:
@@ -62,3 +68,52 @@ spec:
         ports:
           - containerPort: 8000
             name: sre-django
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sre-nginx
+  labels:
+    app: sre-nginx
+spec:
+  ports:
+    - port: 80
+  selector:
+    app: sre-nginx
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sre-nginx
+  labels:
+    app: sre-nginx
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: sre-nginx
+  strategy:
+    type: RollingUpdate
+  minReadySeconds: 3
+  template:
+    metadata:
+      labels:
+        app: sre-nginx
+      annotations:
+        co.elastic.logs/enabled: "true"
+        co.elastic.logs/module: nginx
+        co.elastic.logs/fileset: access
+    spec:
+      containers:
+      - image: zguanhan/sre-f21-nginx:latest
+        name: nginx
+        env:
+          - name: UPSTREAM_HOST
+            value: sre-app
+          - name: STATIC_ROOT
+            value: /app/public
+          - name: NGINX_ENTRYPOINT_QUIET_LOGS
+            value: "1"
+        ports:
+          - containerPort: 80
+            name: sre-nginx

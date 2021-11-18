@@ -1,3 +1,12 @@
+# TODO: For true high availability and scalability, use one of these solutions:
+#
+#       https://v1-18.docs.kubernetes.io/docs/concepts/storage/storage-classes/#provisioner
+#
+#       Storage classes with internal provisioner helps isolating the management
+#       of disk storage away from the application. Database need not be aware of
+#       the underlying disk it uses.
+#
+#
 apiVersion: v1
 kind: Service
 metadata:
